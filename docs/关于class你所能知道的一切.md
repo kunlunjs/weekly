@@ -6,6 +6,8 @@
 - [了解 new.target](基础语法特性/了解new.target.ts)
 - [抽象类与抽象方法](基础语法特性/抽象类与抽象方法.ts)
 - [原型与原型链](基础语法特性/原型与原型链.ts)
+- [继承](基础语法特性/继承.ts)
+- [为什么 class 可实现内置构造函数的继承？](基础语法特性/为什么class可实现内置构造函数的继承？.ts)
 - [instanceof 的本质](基础语法特性/instanceof本质.ts)
 - [Object 与 Function 的关系](基础语法特性/Object与Function的关系.ts)
 - [Object.create 是什么及何时用？](基础语法特性/Object.create是什么及何时用？.ts)
