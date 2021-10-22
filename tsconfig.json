@@ -1,0 +1,57 @@
+{
+  "include": ["docs"],
+  // "files": [],
+  // https://www.typescriptlang.org/tsconfig#compilerOptions
+  "compilerOptions": {
+    /* Type Checking */
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
+    "strict": true,
+    "strictPropertyInitialization": false,
+
+    /* Modules */
+    // "allowUmdGlobalAccess": false, // 允许使用 UMD 模块引入全局变量
+    "baseUrl": "./",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "resolveJsonModule": true, // 允许导入 json 后缀文件
+
+    /* Emit */
+
+    "outDir": "dist",
+    "preserveConstEnums": true,
+    "removeComments": true,
+    "sourceMap": true,
+
+    /* JavaScript Support */
+    "allowJs": true,
+
+    /* Editor Support */
+
+    /* Interop Constraints */
+    "allowSyntheticDefaultImports": true, // 如果模块是 system，或者 esModuleInterop 和 module 不是 es6/es2015 或 esnext 时为 true
+    "esModuleInterop": true, // 启用此项即自动启用 allowSyntheticDefaultImports
+    "forceConsistentCasingInFileNames": true,
+
+    /* Backwards Compatibility */
+
+    /* Languarge and Environmend */
+    "emitDecoratorMetadata": true, // 可以使用 reflect-metadata
+    "experimentalDecorators": true, // 支持 decorator
+    "jsx": "react-jsxdev", // "react" | "react-jsx" | "react-jsxdev" | "preserve" | "react-native"
+    "lib": ["DOM", "ESNext"], // https://github.com/microsoft/TypeScript/tree/main/lib
+    "target": "ES2021", // 基线 https://github.com/tsconfig/bases#centralized-recommendations-for-tsconfig-bases
+
+    /* Compiler Dignostics */
+
+    /* Projects */
+
+    /* Output Formatting */
+
+    /* Completeness */
+    "skipLibCheck": true
+  }
+}

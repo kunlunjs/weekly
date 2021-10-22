@@ -1,0 +1,4 @@
+!.commitlintrc.js
+!.prettierrc.js
+
+docs/*.js
