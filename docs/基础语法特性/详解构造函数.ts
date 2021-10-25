@@ -1,5 +1,24 @@
-class Point {}
+// 知识点：如何对 class 的属性初始化值
+// 方式1
+class Class1 {
+  private x: number
+  constructor(x: number) {
+    this.x = x
+  }
+}
+new Class1(123)
+// 方式2
+class Class2 {
+  constructor(public x: number) {}
 
+  getX() {
+    console.log(this.x)
+    return this.x
+  }
+}
+new Class2(456).getX() // 456
+
+class Point {}
 class ColorPoint1 extends Point {
   // 知识点：子类没有显式添加构造函数，但会被默认添加
 }

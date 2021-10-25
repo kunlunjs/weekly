@@ -17,12 +17,7 @@ module.exports = {
     // https://www.npmjs.com/package/eslint-plugin-prettier#recommended-configuration
     'plugin:prettier/recommended'
   ],
-  plugins: [
-    '@typescript-eslint/eslint-plugin',
-    'import',
-    'unused-imports',
-    'prettier'
-  ],
+  plugins: ['import', 'unused-imports', 'prettier'],
   rules: {
     '@typescript-eslint/ban-ts-comment': 0,
     '@typescript-eslint/consistent-indexed-object-style': 1,
