@@ -1,6 +1,6 @@
 ```plantuml
 @startuml
-skinparam titleFontSize 14
+skinparam titleFontSize 16
 title
   原型与原型链
   |= |= 金科玉律 |
@@ -10,6 +10,7 @@ title
   | 4 | <#80FF80> 普通对象只有 <b>~_~_proto__</b> 属性，没有 <b>__prototype__</b> 属性，即 <b>~_~_proto__</b> 指向构造器的原型对象 |
   | 5 | <#80FF80> 函数和类即有 <b>__prototype__</b> 属性、也有 <b>~_~_proto__</b> 属性 |
   | 6 | <#80FF80> 普通对象.__proto__ === 构造器.prototype |
+  | 7 | <#80FF80> <b>~_~_proto__</b> 是某些浏览器的私有实现，属于历史遗留，实际中应以 <b>__Object.getPrototypeOf()__</b> 替代 |
 end title
 
 class Object {
