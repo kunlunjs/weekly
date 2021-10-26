@@ -15,13 +15,13 @@ console.log(new Boolean(true) instanceof Boolean) // true
 /**
  * polyfill
  */
-// function instanceof_polyfill(left: any, right: any) {
-//   let proto = Object.getPrototypeOf(left)
-//   while (proto) {
-//     if (proto === right.prototype) {
-//       return true
-//     }
-//     proto = Object.getPrototypeOf(proto)
-//   }
-//   return false
-// }
+function instanceof_polyfill(left: any, right: any) {
+  let proto = Object.getPrototypeOf(left)
+  while (proto) {
+    if (proto === right.prototype) {
+      return true
+    }
+    proto = Object.getPrototypeOf(proto)
+  }
+  return false
+}

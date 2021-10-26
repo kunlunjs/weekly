@@ -104,3 +104,4 @@ dist
 .tern-port
 
 docs/一文打尽plantuml语法.md
+class-transformer*

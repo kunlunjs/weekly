@@ -4,22 +4,28 @@ let getSiyou: (instance: InstanceType<typeof StaticBlockExample>) => number
 class StaticBlockExample {
   // 知识点：私有属性
   #siyou = 1
-  static x = -123.456
-  static y: number
-  static z: string
+  // 默认 public
+  static public_static_attr = -123.456
+  private static privated_static_attr: number
+  protected static protected_static_attr: string
 
   static {
-    // 知识点：可以将私有属性与外部代码分享
+    // 知识点：静态块，可以将私有属性与外部代码分享
     getSiyou = (obj: InstanceType<typeof StaticBlockExample>) => obj.#siyou
 
     try {
-      this.y = Math.abs(this.x)
-      this.z = Math.abs(this.x).toFixed(0)
+      this.privated_static_attr = Math.abs(this.public_static_attr)
+      this.protected_static_attr = Math.abs(this.public_static_attr).toFixed(0)
     } catch {
       // failure
     }
   }
 }
-console.log(StaticBlockExample.x, StaticBlockExample.y, StaticBlockExample.z)
+// 默认只能直接访问 public 的静态属性
+console.log(
+  StaticBlockExample.public_static_attr
+  // StaticBlockExample.privated_static_attr,
+  // StaticBlockExample.protected_static_attr
+)
 // TODO
 // console.log(getSiyou(new StaticBlockExample()))

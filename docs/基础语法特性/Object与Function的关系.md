@@ -6,7 +6,7 @@ title
   |= |= 金科玉律 |
   | 1 | <#80FF80> <b>~_~_proto__</b> 表示原型链 |
   | 2 | <#80FF80> <b>__prototype__</b> 表示函数共享的属性和方法 |
-  | 3 | <#80FF80> <b>__Object__</b> 和 <#80FF80> <b>__Function__</b> 都属于函数 |
+  | 3 | <#80FF80> <b>__Object__</b> 和 <b>__Function__</b> 都属于函数 |
   | 4 | <#80FF80> 普通对象只有 <b>~_~_proto__</b> 属性，没有 <b>__prototype__</b> 属性，即 <b>~_~_proto__</b> 指向构造器的原型对象 |
   | 5 | <#80FF80> 函数和类即有 <b>__prototype__</b> 属性、也有 <b>~_~_proto__</b> 属性 |
   | 6 | <#80FF80> 普通对象.__proto__ === 构造器.prototype |
