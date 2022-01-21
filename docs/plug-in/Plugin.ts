@@ -1,5 +1,5 @@
 // @ts-ignore
-import semver from 'semver';
+import semver from 'semver'
 
 // demo
 interface HttpClientInstance {}
@@ -23,10 +23,12 @@ interface IPlugin {
   name: string
   version: string
   versionRange?: string
-  onRegister: (ctx: {
-    log: (content: any, logLevel?: LogLevel) => void
-    // more...
-  } & IPluginContext) => void
+  onRegister: (
+    ctx: {
+      log: (content: any, logLevel?: LogLevel) => void
+      // more...
+    } & IPluginContext
+  ) => void
   onRegistered?: () => void
   onSomeAction?: (arg: ActionX) => void
   onAnotherAction?: (arg: ActionY) => void
@@ -47,7 +49,7 @@ enum LogLevel {
   debug = 'debug',
   log = 'log',
   warn = 'warn',
-  error = 'error',
+  error = 'error'
 }
 
 function _log(origin: string, content: any, logLevel: LogLevel = LogLevel.log) {
@@ -60,7 +62,7 @@ function internalLog(context: any, logLevel?: LogLevel) {
   return _log('Internal', context, logLevel)
 }
 
-const _plugins: IPlugin[] = [];
+const _plugins: IPlugin[] = []
 
 const mockContext: IPluginContext = {
   version: '1.0.1',
@@ -68,7 +70,9 @@ const mockContext: IPluginContext = {
   loadConfig: () => ({})
 }
 
-export default async function addPlugin(arg: IPlugin | IPluginFunction): Promise<UnPlugFunction | void> {
+export default async function addPlugin(
+  arg: IPlugin | IPluginFunction
+): Promise<UnPlugFunction | void> {
   let plugin: IPlugin
   if (arg instanceof Function) {
     plugin = arg(mockContext)
@@ -93,7 +97,10 @@ export default async function addPlugin(arg: IPlugin | IPluginFunction): Promise
   if (plugin.versionRange) {
     // 版本范围匹配
     if (!semver.satisfies(mockContext.version, plugin.versionRange)) {
-      log(`当前应用版本 ${mockContext.version}，不符合插件版本 ${plugin.versionRange} 需求!`, LogLevel.error)
+      log(
+        `当前应用版本 ${mockContext.version}，不符合插件版本 ${plugin.versionRange} 需求!`,
+        LogLevel.error
+      )
       return
     }
   } else {
@@ -122,7 +129,10 @@ export default async function addPlugin(arg: IPlugin | IPluginFunction): Promise
     try {
       plugin.onBeforeUnregister?.()
     } catch (error) {
-      internalLog(`插件 ${plugin.name}@${plugin.version} 卸载错误`, LogLevel.debug)
+      internalLog(
+        `插件 ${plugin.name}@${plugin.version} 卸载错误`,
+        LogLevel.debug
+      )
       log(error, LogLevel.error)
     }
     const index = _plugins.indexOf(plugin)
@@ -134,7 +144,10 @@ export default async function addPlugin(arg: IPlugin | IPluginFunction): Promise
     try {
       plugin.onUnregistered?.()
     } catch (error) {
-      internalLog(`插件 ${plugin.name}@${plugin.version} 卸载错误`, LogLevel.debug)
+      internalLog(
+        `插件 ${plugin.name}@${plugin.version} 卸载错误`,
+        LogLevel.debug
+      )
       log(error, LogLevel.error)
     }
   }
@@ -149,7 +162,7 @@ function inSomeAction() {
   // for (let i = 0; i < _plugins.length; i++)
   // 或者 _plugins.reduce((prev, plugin) => (await prev; return somePromise), [Promise.resolve()])
   // 等方式实现
-  _plugins.forEach(async (plugin) => {
+  _plugins.forEach(async plugin => {
     try {
       await plugin.onSomeAction?.(payload)
     } catch (error) {
@@ -158,7 +171,7 @@ function inSomeAction() {
   })
 }
 
-addPlugin((ctx) => {
+addPlugin(ctx => {
   return {
     name: 'test',
     version: '1.0.1',

@@ -1,15 +1,16 @@
 import path from 'path'
-// import ForkTSCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
-// import CopyWebpackPlugin from 'copy-webpack-plugin'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import type { Configuration as WebpackConfiguration } from 'webpack'
 import type { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-server'
-import { getTSLoader } from '../ts-loader'
+import type { TSLoaderType } from '../loader-for-ts'
+import { getTSLoader } from '../loader-for-ts'
 import { commonConfig } from '../webpack.common.config'
 import { devServerConfig } from '../webpack.dev-server.config'
 
-const LOADER = (process.env.LOADER as 'babel' | 'ts' | 'swc') || 'babel'
-const loaderForTS = getTSLoader(LOADER, false)
+const loaderForTS = getTSLoader({
+  type: process.env.LOADER as TSLoaderType,
+  isReactProject: false
+})
 
 const config: WebpackConfiguration & {
   devServer: WebpackDevServerConfiguration

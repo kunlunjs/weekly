@@ -1,16 +1,18 @@
 import path from 'path'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
-// import ReactRefreshTypeScript from 'react-refresh-typescript'
 import TSConfigPathsPlugin from 'tsconfig-paths-webpack-plugin'
 import type { Configuration } from 'webpack'
-import { getTSLoader } from '../ts-loader'
+import type { TSLoaderType } from '../loader-for-ts'
+import { getTSLoader } from '../loader-for-ts'
 import { commonConfig } from '../webpack.common.config'
 import { devServerConfig } from '../webpack.dev-server.config'
 
 const context = process.cwd()
-const __DEV__ = process.env.NODE_ENV !== 'production'
-const LOADER = (process.env.LOADER as 'babel' | 'ts' | 'swc') || 'babel'
-const loaderForTS = getTSLoader(LOADER)
+const isDevelopment = process.env.NODE_ENV !== 'production'
+const loaderForTS = getTSLoader({
+  type: process.env.LOADER as TSLoaderType,
+  isDevelopment
+})
 
 const config: Configuration = {
   ...commonConfig,

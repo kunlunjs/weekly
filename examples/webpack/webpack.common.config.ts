@@ -47,8 +47,6 @@ export const commonConfig: Configuration = {
     //    */
     //   // verbose: boolean
     // })
-    // new ForkTSCheckerWebpackPlugin({
-    // })
     /**
      * @example 将 public 拷贝到 output.path 中
      * @see [copy-webpack-plugin](https://webpack.js.org/plugins/copy-webpack-plugin/)
