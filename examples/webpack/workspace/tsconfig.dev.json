@@ -1,0 +1,19 @@
+{
+  "extends": "./tsconfig.base.json",
+  "files": ["src/index.tsx"],
+  "compilerOptions": {
+    // "noEmit": false
+    "jsx": "react-jsxdev"
+  },
+  "references": [
+    {
+      "path": "./packages/core"
+    },
+    {
+      "path": "./packages/animals"
+    },
+    {
+      "path": "./packages/zoo"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "extends": "./tsconfig.base.json",
+  "files": ["src/index.tsx"],
+  "compilerOptions": {
+    // "noEmit": false
+  },
+  "references": [
+    {
+      "path": "./packages/core"
+    },
+    {
+      "path": "./packages/animals"
+    },
+    {
+      "path": "./packages/zoo"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "exclude": ["dist"],
+  "files": ["src/index.ts", "src/render.ts"],
+  "compilerOptions": {
+    // "rootDir": "./",
+    "module": "commonjs",
+    "target": "ES5",
+    // "baseUrl": ".",
+    "removeComments": true,
+    "allowSyntheticDefaultImports": true,
+    // "declaration": true,
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node"
+    // "emitDeclarationOnly": true,
+    // "emitDecoratorMetadata": true,                               /* Skip type checking all .d.ts files. */
+    // "experimentalDecorators": true
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "typescript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "../../../node_modules/.bin/cross-env NODE_ENV=development LOADER=ts webpack serve --mode development",
+    "build": "../../../node_modules/.bin/cross-env NODE_ENV=production LOADER=ts swebpack --mode production",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
