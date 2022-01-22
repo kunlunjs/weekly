@@ -4,7 +4,7 @@ import TSConfigPathsPlugin from 'tsconfig-paths-webpack-plugin'
 import type { Configuration } from 'webpack'
 import type { TSLoaderType } from '../loader-for-ts'
 import { getTSLoader } from '../loader-for-ts'
-import { commonConfig } from '../webpack.common.config'
+import { getCommonConfig } from '../webpack.common.config'
 import { devServerConfig } from '../webpack.dev-server.config'
 
 const context = process.cwd()
@@ -13,6 +13,8 @@ const loaderForTS = getTSLoader({
   type: process.env.LOADER as TSLoaderType,
   isDevelopment
 })
+
+const commonConfig = getCommonConfig({ name: 'webpack-workspace-example' })
 
 const config: Configuration = {
   ...commonConfig,

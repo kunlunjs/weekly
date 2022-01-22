@@ -1,0 +1,14 @@
+{
+  "private": true,
+  "scripts": {
+    "start": "lerna run --scope @module-federation/* --parallel start",
+    "build": "lerna run --scope @module-federation/* build",
+    "serve": "lerna run --scope @module-federation/* --parallel serve",
+    "clean": "lerna run --scope @module-federation/* --parallel clean",
+    "start:all": "lerna run --parallel start",
+    "build:all": "lerna run build"
+  },
+  "devDependencies": {
+    "lerna": "^4.0.0"
+  }
+}

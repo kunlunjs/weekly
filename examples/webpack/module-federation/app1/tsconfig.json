@@ -1,0 +1,23 @@
+{
+  // "extends": "../../../../tsconfig.base.json",
+  "include": [
+    "src/**/*",
+    "types/**/*"
+  ],
+  "compilerOptions": {
+    "declaration": true,
+    "declarationMap": true,
+    "esModuleInterop": true,
+    "emitDeclarationOnly": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "jsx": "react-jsx"
+    // "paths": {
+    //   "app2/*": [
+    //     "../app2/src/*"
+    //   ]
+    // }
+  }
+}

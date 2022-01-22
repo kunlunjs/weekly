@@ -4,7 +4,7 @@
   "private": true,
   "workspaces": ["packages/*"],
   "scripts": {
-    "start": "../../../node_modules/.bin/cross-env NODE_ENV=development LOADER=swc webpack serve --mode development",
+    "start": "../../../node_modules/.bin/cross-env NODE_ENV=development LOADER=babel webpack serve --mode development",
     "build": "../../../node_modules/.bin/cross-env NODE_ENV=production webpack --mode production"
   }
 }

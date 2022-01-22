@@ -2,6 +2,7 @@ import ReactRefreshPlugin from '@pmmmwh/react-refresh-webpack-plugin'
 import ForkTSCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
 import ReactRefreshTypeScript from 'react-refresh-typescript'
 import type { Configuration } from 'webpack'
+import getBabelConfig from './babel.config'
 
 /**
  * @dependencies babel-loader
@@ -19,7 +20,10 @@ export const babelLoader: ({
         test: /\.[jt]sx?$/,
         exclude: /node_modules/,
         use: {
-          loader: require.resolve('babel-loader')
+          loader: require.resolve('babel-loader'),
+          options: {
+            ...getBabelConfig({ isDevelopment })
+          }
         }
       }
     ]

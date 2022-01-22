@@ -3,7 +3,13 @@ import type { Configuration } from 'webpack'
 // import webpack from 'webpack'
 import WebpackBar from 'webpackbar'
 
-export const commonConfig: Configuration = {
+export const getCommonConfig = ({
+  name,
+  isDevelopment = true
+}: {
+  name: string
+  isDevelopment?: boolean
+}): Configuration => ({
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.json']
   },
@@ -27,7 +33,7 @@ export const commonConfig: Configuration = {
       /**
        * @attention 默认会把首字母大写
        */
-      name: 'examples/webpack/typescript-with-ts-loader'
+      name
     })
     /**
      * 可以在输出的 js 文件顶部添加注释
@@ -61,4 +67,4 @@ export const commonConfig: Configuration = {
      */
     // new webpack.debug.ProfilingPlugin()
   ]
-}
+})

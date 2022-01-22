@@ -1,6 +1,6 @@
 {
   "exclude": ["dist"],
-  // "files": ["src/index.ts", "src/render.ts"],
+  "files": ["src/**/*"],
   "compilerOptions": {
     // "rootDir": "./",
     "module": "commonjs",
@@ -8,12 +8,12 @@
     // "baseUrl": ".",
     "removeComments": true,
     "allowSyntheticDefaultImports": true,
-    // "declaration": true,
+    "declaration": true,
     "sourceMap": true,
     "esModuleInterop": true,
-    "moduleResolution": "node"
-    // "emitDeclarationOnly": true,
-    // "emitDecoratorMetadata": true,                               /* Skip type checking all .d.ts files. */
-    // "experimentalDecorators": true
+    "moduleResolution": "node",
+    "emitDeclarationOnly": true,
+    "emitDecoratorMetadata": true,                               /* Skip type checking all .d.ts files. */
+    "experimentalDecorators": true
   }
 }

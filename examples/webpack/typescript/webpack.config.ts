@@ -1,10 +1,9 @@
 import path from 'path'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
-import type { Configuration as WebpackConfiguration } from 'webpack'
-import type { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-server'
+import type { Configuration } from 'webpack'
 import type { TSLoaderType } from '../loader-for-ts'
 import { getTSLoader } from '../loader-for-ts'
-import { commonConfig } from '../webpack.common.config'
+import { getCommonConfig } from '../webpack.common.config'
 import { devServerConfig } from '../webpack.dev-server.config'
 
 const loaderForTS = getTSLoader({
@@ -12,9 +11,9 @@ const loaderForTS = getTSLoader({
   isReactProject: false
 })
 
-const config: WebpackConfiguration & {
-  devServer: WebpackDevServerConfiguration
-} = {
+const commonConfig = getCommonConfig({ name: 'webpack-typescript-example' })
+
+const config: Configuration = {
   ...commonConfig,
   // target: 'web',
   // 可通过 webpack --mode development 传入
