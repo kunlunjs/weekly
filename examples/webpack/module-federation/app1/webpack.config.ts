@@ -6,7 +6,7 @@ import webpack from 'webpack'
 import type { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-server'
 // import { getTSLoader } from '../../loader-for-ts'
 // import { getCommonConfig } from '../../webpack.common.config'
-// import { devServerConfig } from '../../webpack.dev-server.config'
+// import { getDevServerConfig } from '../../webpack.dev-server.config'
 
 // const loaderForTS = getTSLoader({})
 
@@ -17,7 +17,7 @@ const config: Configuration & {
 } = {
   // ...commonConfig,
   devServer: {
-    // ...devServerConfig,
+    // ...getDevServerConfig(),
     static: {
       directory: path.join(__dirname, 'dist')
     },

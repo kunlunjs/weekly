@@ -1,24 +1,23 @@
 import path from 'path'
-import HtmlWebpackPlugin from 'html-webpack-plugin'
 import TSConfigPathsPlugin from 'tsconfig-paths-webpack-plugin'
 import type { Configuration } from 'webpack'
-import type { TSLoaderType } from '../loader-for-ts'
-import { getTSLoader } from '../loader-for-ts'
+// import type { TSLoaderType } from '../loader-for-ts'
+// import { getTSLoader } from '../loader-for-ts'
 import { getCommonConfig } from '../webpack.common.config'
-import { devServerConfig } from '../webpack.dev-server.config'
+import { getDevServerConfig } from '../webpack.dev-server.config'
 
 const context = process.cwd()
 const isDevelopment = process.env.NODE_ENV !== 'production'
-const loaderForTS = getTSLoader({
-  type: process.env.LOADER as TSLoaderType,
-  isDevelopment
-})
+// const loaderForTS = getTSLoader({
+//   type: process.env.LOADER as TSLoaderType,
+//   isDevelopment
+// })
 
 const commonConfig = getCommonConfig({ name: 'webpack-workspace-example' })
 
 const config: Configuration = {
   ...commonConfig,
-  devServer: devServerConfig,
+  devServer: getDevServerConfig(),
   context,
   entry: 'src/index',
   output: {
@@ -26,7 +25,10 @@ const config: Configuration = {
     filename: '[name].js'
   },
   module: {
-    rules: [...loaderForTS.module.rules]
+    rules: [
+      /*...loaderForTS.module.rules*/
+      ...commonConfig.module.rules
+    ]
   },
   resolve: {
     ...commonConfig.resolve,
@@ -40,18 +42,8 @@ const config: Configuration = {
     ]
   },
   plugins: [
-    ...commonConfig.plugins,
-    ...loaderForTS.plugins,
-    new HtmlWebpackPlugin({
-      templateContent: `
-        <html>
-          <body>
-            <h1>workspace webpack example</h1>
-            <div id="react-content"></div>
-          </body>
-        </html>
-      `
-    })
+    ...commonConfig.plugins
+    // ...loaderForTS.plugins
   ].filter(Boolean)
 }
 

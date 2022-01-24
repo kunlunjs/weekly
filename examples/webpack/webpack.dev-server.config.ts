@@ -1,33 +1,54 @@
 import type { Configuration } from 'webpack-dev-server'
 
-export const devServerConfig: Configuration = {
-  // http server 端口
-  port: 8000,
-  hot: true,
-  // 自动打开浏览器
-  open: true,
-  // 启用 gzip 压缩
-  compress: true,
-  /**
-   * TODO: understand
-   * 可以额外指定静态文件目录
-   * @relativePath
-   * @optional
-   * @default public
-   */
-  // static: path.resolve(__dirname, 'dist'),
-  client: {
-    logging: 'verbose'
-  },
-  // proxy: {},
-  // 不存在路径重定向到 index.html
-  historyApiFallback: true,
-  // 监听文件变化
-  // watchFiles: {
-  //   paths: ['src/**/*', 'public/**/*']
-  // },
-  devMiddleware: {
+export const getDevServerConfig = (
+  {
+    port,
+    open,
+    hot,
+    compress,
+    historyApiFallback
+  }: {
+    port?: number
+    open?: boolean
+    hot?: boolean
+    compress?: boolean
+    historyApiFallback?: boolean
+  } = {
+    port: 8000,
+    open: true,
+    hot: true,
+    compress: true,
+    historyApiFallback: true
+  }
+): Configuration => {
+  return {
+    // http server 端口
+    port,
+    hot,
+    // 自动打开浏览器
+    open,
+    // 启用 gzip 压缩
+    compress,
     /**
+     * TODO: understand
+     * 可以额外指定静态文件目录
+     * @relativePath
+     * @optional
+     * @default public
+     */
+    // static: path.resolve(__dirname, 'dist'),
+    client: {
+      logging: 'verbose'
+    },
+    // proxy: {},
+    // 不存在路径重定向到 index.html
+    historyApiFallback,
+    // 监听文件变化
+    // watchFiles: {
+    //   paths: ['src/**/*', 'public/**/*']
+    // },
+    devMiddleware: {
+      /**
       * @example
       *   detailed 相比 verbose 在 LOG from webpack.Compiler 上面多了 runtime modules 26.2 KiB
       *   verbose 会输出
@@ -61,15 +82,18 @@ export const devServerConfig: Configuration = {
       *   none
       *   
       */
-    stats: 'errors-warnings',
-    /**
-     * filePath 生成文件完整路径
-     * @default
-     *   main.{20位hash}.hot-update.js
-     *   main.{20位hash}.hot-update.json
-     */
-    writeToDisk: filePath => {
-      return !/hot-update\.js(on)?$/.test(filePath) && !/\.map$/.test(filePath)
+      stats: 'errors-warnings',
+      /**
+       * filePath 生成文件完整路径
+       * @default
+       *   main.{20位hash}.hot-update.js
+       *   main.{20位hash}.hot-update.json
+       */
+      writeToDisk: filePath => {
+        return (
+          !/hot-update\.js(on)?$/.test(filePath) && !/\.map$/.test(filePath)
+        )
+      }
     }
   }
 }

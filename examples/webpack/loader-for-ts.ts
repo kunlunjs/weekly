@@ -20,7 +20,7 @@ export const babelLoader: ({
         test: /\.[jt]sx?$/,
         exclude: /node_modules/,
         use: {
-          loader: require.resolve('babel-loader'),
+          loader: 'babel-loader',
           options: {
             ...getBabelConfig({ isDevelopment })
           }
@@ -30,8 +30,14 @@ export const babelLoader: ({
   },
   plugins: [
     isDevelopment && isReactProject && new ReactRefreshPlugin(),
-    new ForkTSCheckerWebpackPlugin()
-  ].filter(Boolean)
+    new ForkTSCheckerWebpackPlugin({
+      logger: {
+        infrastructure: 'silent',
+        issues: 'silent',
+        devServer: false
+      }
+    })
+  ].filter(Boolean) as Configuration['plugins']
 })
 
 /**
@@ -50,7 +56,7 @@ export const tsLoader: ({
         test: /\.[jt]sx?$/,
         exclude: /node_modules/,
         use: {
-          loader: require.resolve('ts-loader'),
+          loader: 'ts-loader',
           options: {
             // configFile: isDevelopment ? 'tsconfig.dev.json' : 'tsconfig.json',
             transpileOnly: true, // Set to true if you are using fork-ts-checker-webpack-plugin
@@ -69,8 +75,14 @@ export const tsLoader: ({
   },
   plugins: [
     isDevelopment && isReactProject && new ReactRefreshPlugin(),
-    new ForkTSCheckerWebpackPlugin()
-  ].filter(Boolean)
+    new ForkTSCheckerWebpackPlugin({
+      logger: {
+        infrastructure: 'silent',
+        issues: 'silent',
+        devServer: false
+      }
+    })
+  ].filter(Boolean) as Configuration['plugins']
 })
 
 /**
@@ -89,7 +101,7 @@ export const swcLoader: ({
         test: /\.[jt]sx?$/,
         exclude: /node_modules/,
         use: {
-          loader: require.resolve('swc-loader'),
+          loader: 'swc-loader',
           options: {
             env: { mode: 'usage' },
             jsc: {
@@ -118,11 +130,19 @@ export const swcLoader: ({
   },
   plugins: [
     isDevelopment && isReactProject && new ReactRefreshPlugin(),
-    new ForkTSCheckerWebpackPlugin()
-  ].filter(Boolean)
+    new ForkTSCheckerWebpackPlugin({
+      logger: {
+        infrastructure: 'silent',
+        issues: 'silent',
+        devServer: false
+      }
+    })
+  ].filter(Boolean) as Configuration['plugins']
 })
 
 const loaders = { babel: babelLoader, swc: swcLoader, ts: tsLoader }
+
+type Loader = keyof typeof loaders
 
 export type TSLoaderType =
   | 'babel'
@@ -141,5 +161,8 @@ export function getTSLoader({
   isDevelopment?: boolean
   isReactProject?: boolean
 }): Configuration {
-  return loaders[type.split('-')[0]]({ isDevelopment, isReactProject })
+  return loaders[(type.split('-') as string[])[0] as Loader]({
+    isDevelopment,
+    isReactProject
+  }) as Pick<Configuration, 'module' | 'plugins'>
 }

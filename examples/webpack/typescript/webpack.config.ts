@@ -4,7 +4,7 @@ import type { Configuration } from 'webpack'
 import type { TSLoaderType } from '../loader-for-ts'
 import { getTSLoader } from '../loader-for-ts'
 import { getCommonConfig } from '../webpack.common.config'
-import { devServerConfig } from '../webpack.dev-server.config'
+import { getDevServerConfig } from '../webpack.dev-server.config'
 
 const loaderForTS = getTSLoader({
   type: process.env.LOADER as TSLoaderType,
@@ -67,7 +67,7 @@ const config: Configuration = {
       inject: 'body'
     })
   ],
-  devServer: devServerConfig
+  devServer: getDevServerConfig()
 }
 
 export default config

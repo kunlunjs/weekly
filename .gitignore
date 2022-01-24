@@ -105,3 +105,5 @@ dist
 
 docs/一文打尽plantuml语法.md
 class-transformer*
+!examples/webpack/**/node_modules
+dist*

@@ -1,6 +1,6 @@
 {
   "exclude": ["dist"],
-  "files": ["src/**/*"],
+  "include": ["src/**/*"],
   "compilerOptions": {
     // "rootDir": "./",
     "module": "commonjs",

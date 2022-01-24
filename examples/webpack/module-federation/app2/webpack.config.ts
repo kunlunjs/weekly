@@ -6,7 +6,7 @@ import type { Configuration as WebpackDevServerConfiguration } from 'webpack-dev
 // import getBabelConfig from '../../babel.config'
 // import { getTSLoader } from '../../loader-for-ts'
 // import { getCommonConfig } from '../../webpack.common.config'
-// import { devServerConfig } from '../../webpack.dev-server.config'
+// import { getDevServerConfig } from '../../webpack.dev-server.config'
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
 // const loaderForTS = getTSLoader({})
@@ -18,7 +18,7 @@ const config: Configuration & {
 } = {
   // ...commonConfig,
   devServer: {
-    // ...devServerConfig,
+    // ...getDevServerConfig(),
     static: {
       directory: path.join(__dirname, 'dist')
     },
