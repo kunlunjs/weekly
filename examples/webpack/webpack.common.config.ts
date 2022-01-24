@@ -11,12 +11,14 @@ export const getCommonConfig = ({
   name,
   tsLoaderType,
   isBrowser = true,
-  isDevelopment = true
+  isDevelopment = true,
+  chunkIds = 'deterministic'
 }: {
   name: string
   isBrowser?: boolean
   isDevelopment?: boolean
   tsLoaderType?: TSLoaderType
+  chunkIds?: Configuration['optimization']['chunkIds']
 }): Configuration => {
   const loaderForTS = getTSLoader({
     type: tsLoaderType,
@@ -31,7 +33,9 @@ export const getCommonConfig = ({
       extensions: ['.ts', '.tsx', '.js', '.jsx', '.json']
     },
     stats: {
-      // modules: false
+      modules: true,
+      chunks: true,
+      chunkRelations: true
     },
     module: {
       rules: [...(loaderForTS?.module?.rules || [])]
@@ -99,7 +103,7 @@ export const getCommonConfig = ({
       // new webpack.debug.ProfilingPlugin()
     ].filter(Boolean) as Configuration['plugins'],
     optimization: {
-      // chunkIds: 'deterministic'
+      chunkIds
     }
   }
 }
