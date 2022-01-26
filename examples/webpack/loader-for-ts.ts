@@ -17,7 +17,7 @@ export const babelLoader: ({
   module: {
     rules: [
       {
-        test: /\.[jt]sx?$/,
+        test: /\.(mjs|[jt]sx?)$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
@@ -53,7 +53,7 @@ export const tsLoader: ({
   module: {
     rules: [
       {
-        test: /\.[jt]sx?$/,
+        test: /\.(mjs|[jt]sx?)$/,
         exclude: /node_modules/,
         use: {
           loader: 'ts-loader',
@@ -98,7 +98,7 @@ export const swcLoader: ({
   module: {
     rules: [
       {
-        test: /\.[jt]sx?$/,
+        test: /\.(mjs|[jt]sx?)$/,
         exclude: /node_modules/,
         use: {
           loader: 'swc-loader',

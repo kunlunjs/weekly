@@ -1,5 +1,5 @@
-// import { CleanWebpackPlugin } from 'clean-webpack-plugin'
 import path from 'path'
+import { CleanWebpackPlugin } from 'clean-webpack-plugin'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import type { Configuration } from 'webpack'
 // import webpack from 'webpack'
@@ -10,15 +10,17 @@ import { getTSLoader } from './loader-for-ts'
 export const getCommonConfig = ({
   name,
   tsLoaderType,
-  isBrowser = true,
   isDevelopment = true,
-  chunkIds = 'deterministic'
+  optimization = {
+    chunkIds: 'deterministic'
+  },
+  hasHtmlWebpackPlugin = true
 }: {
   name: string
-  isBrowser?: boolean
   isDevelopment?: boolean
   tsLoaderType?: TSLoaderType
-  chunkIds?: Configuration['optimization']['chunkIds']
+  hasHtmlWebpackPlugin?: boolean
+  optimization?: Configuration['optimization']
 }): Configuration => {
   const loaderForTS = getTSLoader({
     type: tsLoaderType,
@@ -30,7 +32,7 @@ export const getCommonConfig = ({
       path: path.resolve(process.cwd(), 'dist')
     },
     resolve: {
-      extensions: ['.ts', '.tsx', '.js', '.jsx', '.json']
+      extensions: ['.ts', '.tsx', '.js', '.jsx']
     },
     stats: {
       modules: true,
@@ -57,7 +59,7 @@ export const getCommonConfig = ({
         name
       }),
       ...(loaderForTS.plugins || []),
-      isBrowser &&
+      hasHtmlWebpackPlugin &&
         new HtmlWebpackPlugin({
           inject: 'body',
           minify: false,
@@ -69,7 +71,7 @@ export const getCommonConfig = ({
           </body>
         </html>
       `
-        })
+        }),
       /**
        * 可以在输出的 js 文件顶部添加注释
        * @see [BannerPlugin](https://webpack.js.org/plugins/banner-plugin/)
@@ -80,14 +82,15 @@ export const getCommonConfig = ({
       // }),
       /**
        * 编译前清空 output.path，如没有定义则此插件不生效
+       * @see https://github.com/johnagan/clean-webpack-plugin
        */
-      // new CleanWebpackPlugin({
-      //   /**
-      //    * Always enabled when dry is true
-      //    * @default false
-      //    */
-      //   // verbose: boolean
-      // })
+      new CleanWebpackPlugin({
+        /**
+         * Always enabled when dry is true
+         * @default false
+         */
+        // verbose: boolean
+      })
       /**
        * @example 将 public 拷贝到 output.path 中
        * @see [copy-webpack-plugin](https://webpack.js.org/plugins/copy-webpack-plugin/)
@@ -103,7 +106,7 @@ export const getCommonConfig = ({
       // new webpack.debug.ProfilingPlugin()
     ].filter(Boolean) as Configuration['plugins'],
     optimization: {
-      chunkIds
+      ...optimization
     }
   }
 }

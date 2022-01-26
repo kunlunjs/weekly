@@ -1,0 +1,13 @@
+{
+  "name": "@webpack-examples/experiments",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "npx cross-env NODE_ENV=development TS_NODE_PROJECT=\"tsconfig-for-webpack.json\" webpack serve --mode development",
+    "build": "npx cross-env TS_NODE_PROJECT=\"tsconfig-for-webpack.json\" webpack --mode production",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

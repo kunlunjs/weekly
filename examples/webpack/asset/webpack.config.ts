@@ -7,6 +7,7 @@ import { getCommonConfig } from '../webpack.common.config'
 
 const configs: Configuration[] = [
   {
+    name: 'asset-simple',
     entry: './src/index.tsx',
     output: {
       path: path.resolve(__dirname, 'dist1'),
@@ -22,6 +23,7 @@ const configs: Configuration[] = [
     }
   },
   {
+    name: 'asset-advanced',
     entry: './src/index.tsx',
     output: {
       path: path.resolve(__dirname, 'dist2'),
@@ -46,13 +48,18 @@ const configs: Configuration[] = [
   }
 ]
 
-export default configs.map((config, index) =>
+export default configs.map(config =>
   merge<Configuration>(
-    getCommonConfig({ name: `asset_${index}` }),
+    getCommonConfig({ name: config.name as string }),
     {
       // TODO: [webpack-dev-middleware] ConcurrentCompilationError: You ran Webpack twice. Each instance only supports a single concurrent compilation at a time.
       // devServer: getDevServerConfig({ port: 8000 + index })
     },
-    config
+    config,
+    {
+      output: {
+        path: path.resolve(__dirname, `dist-${config.name}`)
+      }
+    }
   )
 )

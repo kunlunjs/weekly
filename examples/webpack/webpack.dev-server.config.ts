@@ -82,7 +82,11 @@ export const getDevServerConfig = (
       *   none
       *   
       */
-      stats: 'errors-warnings',
+      stats: {
+        modules: true,
+        chunks: true,
+        chunkRelations: true
+      }, // 'errors-warnings',
       /**
        * filePath 生成文件完整路径
        * @default

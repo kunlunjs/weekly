@@ -37,6 +37,7 @@ const config: Configuration = {
   },
   output: {
     /**
+     * @absolutePath
      * @optional
      * @default dist
      */
@@ -55,7 +56,7 @@ const config: Configuration = {
     ...loaderForTS.plugins,
     /**
      * 如果使用了此插件，则会使用 output.path 中的 html
-     * @see [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin)
+     * @see https://github.com/jantimon/html-webpack-plugin
      * @example
      *   new HtmlWebpackPlugin() 自动在 output.path 中输出一个 index.html
      */
