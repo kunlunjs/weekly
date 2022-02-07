@@ -27,7 +27,7 @@ const config: Configuration = {
   module: {
     rules: [
       /*...loaderForTS.module.rules*/
-      ...commonConfig.module.rules
+      ...(commonConfig?.module?.rules || [])
     ]
   },
   resolve: {
@@ -42,7 +42,7 @@ const config: Configuration = {
     ]
   },
   plugins: [
-    ...commonConfig.plugins
+    ...(commonConfig?.plugins || [])
     // ...loaderForTS.plugins
   ].filter(Boolean)
 }

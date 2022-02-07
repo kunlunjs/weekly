@@ -1,4 +1,3 @@
-import path from 'path'
 import type { Configuration } from 'webpack'
 import { merge } from 'webpack-merge'
 import { getCommonConfig } from '../webpack.common.config'
@@ -46,11 +45,6 @@ export default configs.map(config =>
     {
       devServer: configs.length > 1 ? undefined : getDevServerConfig()
     },
-    config,
-    {
-      output: {
-        path: path.resolve(__dirname, `dist-${config.name}`)
-      }
-    }
+    config
   )
 )

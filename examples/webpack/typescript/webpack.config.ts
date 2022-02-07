@@ -7,8 +7,7 @@ import { getCommonConfig } from '../webpack.common.config'
 import { getDevServerConfig } from '../webpack.dev-server.config'
 
 const loaderForTS = getTSLoader({
-  type: process.env.LOADER as TSLoaderType,
-  isReactProject: false
+  type: process.env.LOADER as TSLoaderType
 })
 
 const commonConfig = getCommonConfig({ name: 'webpack-typescript-example' })
@@ -50,10 +49,10 @@ const config: Configuration = {
     filename: 'bundle.js'
   },
   module: {
-    rules: [...loaderForTS.module.rules]
+    rules: [...(loaderForTS?.module?.rules || [])]
   },
   plugins: [
-    ...loaderForTS.plugins,
+    ...(loaderForTS.plugins || []),
     /**
      * 如果使用了此插件，则会使用 output.path 中的 html
      * @see https://github.com/jantimon/html-webpack-plugin

@@ -1,4 +1,3 @@
-import path from 'path'
 // import TSConfigPathsPlugin from 'tsconfig-paths-webpack-plugin'
 import type { Configuration } from 'webpack'
 import { merge } from 'webpack-merge'
@@ -40,11 +39,6 @@ export default configs.map(config =>
     {
       devServer: configs.length > 1 ? undefined : getDevServerConfig()
     },
-    config,
-    {
-      output: {
-        path: path.resolve(__dirname, `dist-${config.name}`)
-      }
-    }
+    config
   )
 )

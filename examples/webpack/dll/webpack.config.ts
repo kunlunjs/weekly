@@ -70,11 +70,6 @@ export default configs.map(config => {
               historyApiFallback: false
             })
     },
-    config,
-    {
-      output: {
-        path: path.resolve(process.cwd(), `dist-${config.name}`)
-      }
-    }
+    config
   )
 })

@@ -1,16 +1,17 @@
-import path from 'path'
 import svgToMinDataURI from 'mini-svg-data-uri'
 import type { Configuration } from 'webpack'
 import { merge } from 'webpack-merge'
 import { getCommonConfig } from '../webpack.common.config'
 // import { getDevServerConfig } from '../webpack.dev-server.config'
 
+/**
+ * [ext] 自带 .
+ */
 const configs: Configuration[] = [
   {
     name: 'asset-simple',
     entry: './src/index.tsx',
     output: {
-      path: path.resolve(__dirname, 'dist1'),
       assetModuleFilename: 'images/[hash][ext]'
     },
     module: {
@@ -26,7 +27,6 @@ const configs: Configuration[] = [
     name: 'asset-advanced',
     entry: './src/index.tsx',
     output: {
-      path: path.resolve(__dirname, 'dist2'),
       assetModuleFilename: 'images/[hash][ext]'
     },
     module: {
@@ -35,7 +35,7 @@ const configs: Configuration[] = [
           test: /\.(png|jpe?g|svg)$/,
           type: 'asset',
           generator: {
-            dataUrl: content => {
+            dataUrl: (content: any) => {
               if (typeof content !== 'string') {
                 content = content.toString()
               }
@@ -46,6 +46,33 @@ const configs: Configuration[] = [
       ]
     }
   }
+  // FIXME
+  // {
+  //   name: 'asset-@svgr/webpack',
+  //   entry: './src/index.tsx',
+  //   output: {
+  //     assetModuleFilename: 'images/[hash][ext]'
+  //   },
+  //   module: {
+  //     rules: [
+  //       {
+  //         test: /\.(png|jpe?g|gif|bmp)$/,
+  //         type: 'asset'
+  //       },
+  //       {
+  //         test: /\.svg$/,
+  //         use: [
+  //           {
+  //             loader: '@svgr/webpack',
+  //             options: {
+  //               native: true
+  //             }
+  //           }
+  //         ]
+  //       }
+  //     ]
+  //   }
+  // }
 ]
 
 export default configs.map(config =>
@@ -55,11 +82,6 @@ export default configs.map(config =>
       // TODO: [webpack-dev-middleware] ConcurrentCompilationError: You ran Webpack twice. Each instance only supports a single concurrent compilation at a time.
       // devServer: getDevServerConfig({ port: 8000 + index })
     },
-    config,
-    {
-      output: {
-        path: path.resolve(__dirname, `dist-${config.name}`)
-      }
-    }
+    config
   )
 )
