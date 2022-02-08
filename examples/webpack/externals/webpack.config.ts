@@ -1,7 +1,6 @@
 import type { Configuration } from 'webpack'
 import { merge } from 'webpack-merge'
 import { getCommonConfig } from '../webpack.common.config'
-import { getDevServerConfig } from '../webpack.dev-server.config'
 
 /**
  * @see https://webpack.docschina.org/plugins/dll-plugin/
@@ -29,9 +28,6 @@ export default configs.map(config =>
     getCommonConfig({
       name: config.name as string
     }),
-    {
-      devServer: getDevServerConfig()
-    },
     config
   )
 )

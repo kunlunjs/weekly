@@ -1,8 +1,6 @@
-import path from 'path'
 import type { Configuration } from 'webpack'
 import { merge } from 'webpack-merge'
 import { getCommonConfig } from '../webpack.common.config'
-import { getDevServerConfig } from '../webpack.dev-server.config'
 
 const configs: Configuration[] = [
   {
@@ -56,14 +54,6 @@ export default configs.map((config, index) => {
     getCommonConfig({
       name: `code-splitting:${name}`
     }),
-    {
-      devServer: configs.length > 1 ? undefined : getDevServerConfig()
-    },
-    config,
-    {
-      output: {
-        path: path.resolve(__dirname, `dist-${name}`)
-      }
-    }
+    config
   )
 })

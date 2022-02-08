@@ -108,3 +108,5 @@ class-transformer*
 !examples/webpack/**/node_modules
 dist
 dist*
+examples/nestjs
+.swc

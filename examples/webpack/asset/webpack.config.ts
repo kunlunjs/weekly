@@ -2,7 +2,6 @@ import svgToMinDataURI from 'mini-svg-data-uri'
 import type { Configuration } from 'webpack'
 import { merge } from 'webpack-merge'
 import { getCommonConfig } from '../webpack.common.config'
-// import { getDevServerConfig } from '../webpack.dev-server.config'
 
 /**
  * [ext] 自带 .
@@ -76,12 +75,5 @@ const configs: Configuration[] = [
 ]
 
 export default configs.map(config =>
-  merge<Configuration>(
-    getCommonConfig({ name: config.name as string }),
-    {
-      // TODO: [webpack-dev-middleware] ConcurrentCompilationError: You ran Webpack twice. Each instance only supports a single concurrent compilation at a time.
-      // devServer: getDevServerConfig({ port: 8000 + index })
-    },
-    config
-  )
+  merge<Configuration>(getCommonConfig({ name: config.name as string }), config)
 )
